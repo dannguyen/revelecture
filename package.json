@@ -2,7 +2,6 @@
   "name": "reveal-static-markdown",
   "version": "0.0.1",
   "description": "A command-line tool to turn Markdown files into Reveal.js powered slideshows",
-  "main": "index.js",
   "scripts": {
     "test": "jest"
   },
@@ -20,5 +19,23 @@
   "bugs": {
     "url": "https://github.com/dannguyen/reveal-static-markdown/issues"
   },
-  "homepage": "https://github.com/dannguyen/reveal-static-markdown#readme"
+  "homepage": "https://github.com/dannguyen/reveal-static-markdown#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "glob": "^7.0.5",
+    "mustache": "^2.2.1",
+    "open": "0.0.5",
+    "reveal": "0.0.4"
+  },
+  "bin": {
+    "reveal-static": "./bin/cli.js"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.10.1",
+    "babel-jest": "^12.1.0",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "jest-cli": "^12.1.1"
+  }
 }
