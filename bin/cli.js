@@ -1,18 +1,25 @@
 #!/usr/bin/env node
+
 'use strict';
 
-var program = require('commander'),
-    pkg = require('../package.json');
+var _commander = require('commander');
 
-program
-  .version(pkg.version)
-  .usage("what up dude!")
-  .command('hello [name]')
-  .option('-n', '--name', 'Someone to say hi to')
-  .action(name => console.log("HELLO " + name + '!!'));
+var _commander2 = _interopRequireDefault(_commander);
 
-program.parse(process.argv);
+var _hello = require('./lib/hello');
 
-if(program.args.length < 2){
-  program.help();
+var _hello2 = _interopRequireDefault(_hello);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var pkg = require('../package.json');
+
+
+_commander2.default.version(pkg.version).usage("Use me lose me.");
+
+(0, _hello2.default)(_commander2.default);
+
+_commander2.default.parse(process.argv);
+if (_commander2.default.args.length < 2) {
+  _commander2.default.help();
 }

@@ -1,9 +1,13 @@
 {
   "name": "reveal-static-markdown",
   "version": "0.0.1",
+  "main": "index.js",
   "description": "A command-line tool to turn Markdown files into Reveal.js powered slideshows",
   "scripts": {
-    "test": "jest"
+    "clean": "mkdir -p bin; rm -rf bin/*",
+    "compile": "npm run clean; babel src/index.js --out-file bin/cli.js; babel src/lib --out-dir bin/lib",
+    "test": "jest",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
