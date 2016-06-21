@@ -1,0 +1,24 @@
+{
+  "name": "reveal-static-markdown",
+  "version": "0.0.1",
+  "description": "A command-line tool to turn Markdown files into Reveal.js powered slideshows",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannguyen/reveal-static-markdown.git"
+  },
+  "keywords": [
+    "reveal",
+    "slideshow",
+    "markdown"
+  ],
+  "author": "Dan Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dannguyen/reveal-static-markdown/issues"
+  },
+  "homepage": "https://github.com/dannguyen/reveal-static-markdown#readme"
+}
