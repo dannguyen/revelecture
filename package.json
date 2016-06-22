@@ -28,6 +28,7 @@
     "commander": "^2.9.0",
     "glob": "^7.0.5",
     "handlebars": "^4.0.5",
+    "html": "0.0.10",
     "marked": "^0.3.5",
     "open": "0.0.5",
     "reveal": "0.0.4"
@@ -41,6 +42,7 @@
     "babel-jest": "^12.1.0",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
-    "jest-cli": "^12.1.1"
+    "jest-cli": "^12.1.1",
+    "temp": "^0.8.3"
   }
 }

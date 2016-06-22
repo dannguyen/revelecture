@@ -1,20 +1,25 @@
 'use strict'
 import fs from 'fs';
-import path from 'path';
 import glob from 'glob';
-import marked from 'marked';
+import path from 'path';
+
 import Handlebars from 'handlebars';
+import marked from 'marked';
 
-const slideTemplatePath = path.join(__dirname, '../templates/slide.html')
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true
+});
 
-let markdownifyFile = fname => {
-  let contents = fs.readFileSync(fname, 'utf8');
-  return marked(contents);
+// const slideTemplatePath = path.join(__dirname, '../templates/slide.html')
+const slideTemplate = Handlebars.compile(`<section class="slide">{{{ content }}}</section>`);
+
+export let markdownifyFile = filename => {
+  return marked(fs.readFileSync(filename, 'utf8'));
 };
 
-let renderSlide = htmltxt => {
-  let tempslide = Handlebars.compile(fs.readFileSync(slideTemplatePath, 'utf8'));
-  return tempslide({content: htmltxt.trim() });
+export let renderSlide = htmltxt => {
+  return slideTemplate({content: htmltxt.trim()}).trim();
 }
 
 
