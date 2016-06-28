@@ -1,5 +1,5 @@
 {
-  "name": "revalecture",
+  "name": "revelecture",
   "version": "0.0.1",
   "main": "index.js",
   "description": "A command-line tool to turn Markdown files into Reveal.js powered slideshows",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dannguyen/revalecture.git"
+    "url": "git+https://github.com/dannguyen/revelecture.git"
   },
   "keywords": [
     "reveal",
@@ -21,9 +21,9 @@
   "author": "Dan Nguyen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dannguyen/revalecture/issues"
+    "url": "https://github.com/dannguyen/revelecture/issues"
   },
-  "homepage": "https://github.com/dannguyen/reveal-static-markdown#readme",
+  "homepage": "https://github.com/dannguyen/revelecture#readme",
   "dependencies": {
     "commander": "^2.9.0",
     "glob": "^7.0.5",
@@ -33,7 +33,7 @@
     "reveal": "0.0.4"
   },
   "bin": {
-    "revalecture": "./bin/cli.js"
+    "revelecture": "./bin/cli.js"
   },
   "devDependencies": {
     "babel": "^6.5.2",

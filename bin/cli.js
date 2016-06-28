@@ -10,6 +10,10 @@ var _hello = require('./lib/hello');
 
 var _hello2 = _interopRequireDefault(_hello);
 
+var _make = require('./lib/make');
+
+var _make2 = _interopRequireDefault(_make);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var pkg = require('../package.json');
@@ -18,6 +22,7 @@ var pkg = require('../package.json');
 _commander2.default.version(pkg.version).usage("Use me lose me.");
 
 (0, _hello2.default)(_commander2.default);
+(0, _make2.default)(_commander2.default);
 
 _commander2.default.parse(process.argv);
 if (_commander2.default.args.length < 2) {

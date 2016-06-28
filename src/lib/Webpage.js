@@ -1,4 +1,4 @@
-export class Page{
+export class Webpage{
   // webpage?
   // wrapper around slideshow and overview
   // adds meta data

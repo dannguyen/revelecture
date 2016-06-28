@@ -11,7 +11,7 @@ marked.setOptions({
 export const slideTemplate = Handlebars.compile(`<section class="slide">{{{ content }}}</section>`);
 
 
-export class Slide{
+export default class Slide{
   constructor(object){
     if (!(typeof object.content === 'string' && typeof object.meta === 'object' && object.meta)){
       throw new InvalidSlideObjectError();

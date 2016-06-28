@@ -1,9 +1,40 @@
 jest.disableAutomock();
 import tempyfile from './helpers/tempyfile';
+import contentParser from '../src/lib/contentParser';
 
 
 describe('contentParser()', () => {
+  afterEach(function() {
+    tempyfile.sweep();
+  });
 
+  it('should set meta.filename at a minimum', () => {
+    let tname = tempyfile.create("");
+    let data = contentParser(tname);
+    expect(data.meta.filename).toEqual(tname);
+    expect(data.content).toEqual("");
+  })
+
+  it('should have a content value even if no frontmatter is set', () => {
+    let tname = tempyfile.create("hello world");
+    let data = contentParser(tname);
+    expect(data.content).toEqual("hello world");
+  })
+
+
+  describe("frontmatter parsing", () => {
+    let tname = tempyfile.create("---\ntitle: Hello\nbackground:\n  color: pink\n---\n## Goodbye world\n");
+    let stuff = contentParser(tname);
+
+    it('should parse frontmatter as yaml and store in meta Object', () => {
+      expect(stuff.meta.title).toEqual('Hello')
+      expect(stuff.meta.background.color).toEqual('pink')
+    });
+
+    it('should preserve non-frontmatter exactly', () => {
+      expect(stuff.content).toEqual('## Goodbye world\n');
+    });
+  })
 })
 
 // import {markdownifyFile} from '../src/lib/make';

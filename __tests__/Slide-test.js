@@ -1,5 +1,5 @@
 jest.disableAutomock();
-import {Slide} from '../src/lib/Slide';
+import Slide from '../src/lib/Slide';
 import {InvalidSlideObjectError} from '../src/lib/SlideErrors';
 
 describe('Slide constructor', () => {
@@ -69,8 +69,9 @@ describe('Slide constructor', () => {
       let html = slide.renderSlide();
       expect(html).toContain('<h3 id="hello-world-">Hello <em>world</em></h3>');
       expect(html).toMatch(/<section class=".*?slide.*?"/);
-    })
-  })
+    });
+  });
+
 
 })
 

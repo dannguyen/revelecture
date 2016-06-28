@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 
-export let contentParser = filename => {
+export default function(filename){
   let txt = fs.readFileSync(filename, 'utf8')
   let o = frontmatter(txt);
   o.attributes.filename = filename;
