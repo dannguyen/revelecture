@@ -1,5 +1,5 @@
 {
-  "name": "reveal-static-markdown",
+  "name": "revalecture",
   "version": "0.0.1",
   "main": "index.js",
   "description": "A command-line tool to turn Markdown files into Reveal.js powered slideshows",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dannguyen/reveal-static-markdown.git"
+    "url": "git+https://github.com/dannguyen/revalecture.git"
   },
   "keywords": [
     "reveal",
@@ -19,22 +19,21 @@
     "markdown"
   ],
   "author": "Dan Nguyen",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dannguyen/reveal-static-markdown/issues"
+    "url": "https://github.com/dannguyen/revalecture/issues"
   },
   "homepage": "https://github.com/dannguyen/reveal-static-markdown#readme",
   "dependencies": {
     "commander": "^2.9.0",
     "glob": "^7.0.5",
     "handlebars": "^4.0.5",
-    "html": "0.0.10",
     "marked": "^0.3.5",
     "open": "0.0.5",
     "reveal": "0.0.4"
   },
   "bin": {
-    "reveal-static": "./bin/cli.js"
+    "revalecture": "./bin/cli.js"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -42,7 +41,6 @@
     "babel-jest": "^12.1.0",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
-    "jest-cli": "^12.1.1",
-    "temp": "^0.8.3"
+    "jest-cli": "^12.1.1"
   }
 }
