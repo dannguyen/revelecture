@@ -60,12 +60,3 @@ export default function addMake(proggy){
 
     });
 };
-
-
-export class InvalidSlideObjectError extends Error {
-  constructor(message = `Argument must be an Object with {content: 'string', data: {}}`){
-    super(message)
-    this.message = message;
-    this.name = 'InvalidSlideObjectError'
-  }
-}
