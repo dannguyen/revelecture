@@ -1,7 +1,33 @@
-import contentParser from './contentParser';
 import glob from 'glob';
 import path from 'path';
+import Handlebars from 'handlebars';
+import contentParser from './contentParser';
 import Slide from './Slide';
+
+let revealjs_required_path = path.resolve(require.resolve('reveal')); 
+
+const slideshowTemplate = Handlebars.compile(`<html>
+    <head>
+      {{#each stylesheets as |css_path|}}
+        <link rel="stylesheet" href="{{css_path}}">
+      {{/each}}
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+              {{#each slides as |slide|}}
+                 {{{slide}}}
+              {{/each}}
+            </div>
+        </div>
+        <script src="{{revealjs_path}}"></script>
+        <script>
+            Reveal.initialize();
+        </script>
+    </body>
+</html>`);
+
+
 
 export default class Presentation{
   constructor(srcPath){
@@ -26,9 +52,10 @@ export default class Presentation{
 
 
   renderSlideshow(){
-    return this.slides.map(slide => {
-       return slide.renderSlide();
-    }).join("\n\n");
+    return slideshowTemplate({
+      slides: this.slides.map(slide => slide.renderSlide()),
+      revealjs_path: revealjs_required_path
+    })
   }
 
   renderOverview(){
