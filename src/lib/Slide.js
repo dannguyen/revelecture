@@ -10,7 +10,14 @@ marked.setOptions({
 });
 
 
-export const slideTemplate = Handlebars.compile(`<section class="slide">{{{ content }}}</section>`);
+export const htmlTemplate = Handlebars.compile(`
+<div class="content">{{{ content }}}</div>
+{{#if notes}}<div class="notes">{{{ notes }}}</div>{{/if}}`)
+
+export const slideTemplate = Handlebars.compile(`
+<section class="section slide">
+  {{{ slideContent }}}
+</section>`);
 
 
 export default class Slide{
@@ -18,11 +25,11 @@ export default class Slide{
     if (!(_.isString(object.content) && _.isPlainObject(object.meta))){
       throw new InvalidSlideObjectError();
     }
-    this.content = object.content.trim();
+    this.content = _.trim(object.content);
     this._meta = object.meta;
     this.title = _.isEmpty(this._meta.title) ? undefined : _.trim(this._meta.title);
     this.sectionTitle = this._meta.section === true ? true : false;
-    this.notes = this._meta.notes;
+    this.notes = _.isEmpty(this._meta.notes) ? undefined : _.trim(this._meta.notes);
     this.transition = this._meta.transition;
     this.transition_speed = this._meta.transition_speed;
   }
@@ -45,10 +52,12 @@ export default class Slide{
 
 
   renderHTML(){
-    let html = "";
-    html += this._mdTitle();
-    html += _.trim(this.content);
-    return marked(html);
+    let notes = this._htmlNotes(),
+        content = "";
+    content += this._mdTitle();
+    content += marked(this.content);
+
+    return _.trim(htmlTemplate({content: content, notes: notes}));
   }
 
   renderArticle(){
@@ -56,7 +65,7 @@ export default class Slide{
   }
 
   renderSlide(){
-    return pretty(slideTemplate({content: this.renderHTML()}));
+    return pretty(slideTemplate({slideContent: this.renderHTML()}));
   }
 
 
@@ -64,12 +73,17 @@ export default class Slide{
 
   _mdTitle(){
     if (_.isEmpty(this.title)){ return ""; }
+    let tslug = this.title.toLowerCase().replace(/[^\w]+/g, '-'); // this comes from marked
     if (this.sectionTitle === true){
-      let tslug = this.title.toLowerCase().replace(/[^\w]+/g, '-'); // this comes from marked
-      return `<h1 class="section-title" id="${tslug}">${this.title}</h1>\n`
+      return `<h1 class="section-title title" id="${tslug}">${this.title}</h1>`
     }else{
-      return `## ${this.title}\n`;
+      return `<h2 class="content-title title" id="${tslug}">${this.title}</h2>`;
     }
+  }
+
+  _htmlNotes(){
+    if (_.isEmpty(this.notes)){ return ""; }
+    return `\n<aside class="notes">${marked(this.notes)}</aside>`
   }
 
 }

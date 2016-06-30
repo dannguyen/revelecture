@@ -49,7 +49,7 @@ describe('Slide constructor', () => {
     })
 
     it('should derive notes but not render them yet as HTML via markdown', () => {
-      expect(slide.notes).toEqual("  # These notes  ");
+      expect(slide.notes).toEqual("# These notes");
     });
 
     it('should derive transition data as literal strings', () => {
