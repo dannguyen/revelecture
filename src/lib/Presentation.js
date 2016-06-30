@@ -30,10 +30,11 @@ let revealjs_required_path = path.resolve(require.resolve('reveal'));
 
 const slideshowTemplate = Handlebars.compile(`<html>
     <head>
-    <link rel="stylesheet" href="assets/stylesheets/reveal.css">
+        <link rel="stylesheet" href="assets/stylesheets/theme.css">
+        <link rel="stylesheet" href="assets/stylesheets/reveal.css">
         <link rel="stylesheet" href="assets/stylesheets/slideshow.css">
     </head>
-    <body>
+    <body class="slideshow">
         <div class="reveal">
             <div class="slides">
               {{#each slides as |slide|}}
@@ -42,9 +43,7 @@ const slideshowTemplate = Handlebars.compile(`<html>
             </div>
         </div>
         <script src="assets/javascript/reveal.js"></script>
-        <script>
-            Reveal.initialize();
-        </script>
+        <script src="assets/javascript/reveal-initialize.js"></script>
     </body>
 </html>`);
 

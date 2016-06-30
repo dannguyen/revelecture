@@ -46,6 +46,7 @@ var Slide = function () {
     this.content = object.content.trim();
     this._meta = object.meta;
     this.title = _lodash2.default.isEmpty(this._meta.title) ? undefined : _lodash2.default.trim(this._meta.title);
+    this.sectionTitle = this._meta.section === true ? true : false;
     this.notes = this._meta.notes;
     this.transition = this._meta.transition;
     this.transition_speed = this._meta.transition_speed;
@@ -69,25 +70,33 @@ var Slide = function () {
     key: 'renderHTML',
     value: function renderHTML() {
       var html = "";
-      html += this._HTMLtitle();
-      html += (0, _marked2.default)(this.content).trim();
-      return html;
+      html += this._mdTitle();
+      html += _lodash2.default.trim(this.content);
+      return (0, _marked2.default)(html);
     }
+  }, {
+    key: 'renderArticle',
+    value: function renderArticle() {}
   }, {
     key: 'renderSlide',
     value: function renderSlide() {
       return (0, _pretty2.default)(slideTemplate({ content: this.renderHTML() }));
     }
   }, {
-    key: 'renderSection',
-    value: function renderSection() {}
-  }, {
     key: '_render',
     value: function _render(format) {}
   }, {
-    key: '_HTMLtitle',
-    value: function _HTMLtitle() {
-      return _lodash2.default.isEmpty(this.title) ? "" : (0, _marked2.default)('## ' + this.title) + '\n';
+    key: '_mdTitle',
+    value: function _mdTitle() {
+      if (_lodash2.default.isEmpty(this.title)) {
+        return "";
+      }
+      if (this.sectionTitle === true) {
+        var tslug = this.title.toLowerCase().replace(/[^\w]+/g, '-'); // this comes from marked
+        return '<h1 class="section-title" id="' + tslug + '">' + this.title + '</h1>\n';
+      } else {
+        return '## ' + this.title + '\n';
+      }
     }
   }]);
 

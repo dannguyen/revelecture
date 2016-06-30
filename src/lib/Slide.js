@@ -21,6 +21,7 @@ export default class Slide{
     this.content = object.content.trim();
     this._meta = object.meta;
     this.title = _.isEmpty(this._meta.title) ? undefined : _.trim(this._meta.title);
+    this.sectionTitle = this._meta.section === true ? true : false;
     this.notes = this._meta.notes;
     this.transition = this._meta.transition;
     this.transition_speed = this._meta.transition_speed;
@@ -45,23 +46,30 @@ export default class Slide{
 
   renderHTML(){
     let html = "";
-    html += this._HTMLtitle();
-    html += marked(this.content).trim();
-    return html;
+    html += this._mdTitle();
+    html += _.trim(this.content);
+    return marked(html);
+  }
+
+  renderArticle(){
+
   }
 
   renderSlide(){
     return pretty(slideTemplate({content: this.renderHTML()}));
   }
 
-  renderSection(){
-
-  }
 
   _render(format){ }
 
-  _HTMLtitle(){
-    return _.isEmpty(this.title) ? "" : marked(`## ${this.title}`) + '\n';
+  _mdTitle(){
+    if (_.isEmpty(this.title)){ return ""; }
+    if (this.sectionTitle === true){
+      let tslug = this.title.toLowerCase().replace(/[^\w]+/g, '-'); // this comes from marked
+      return `<h1 class="section-title" id="${tslug}">${this.title}</h1>\n`
+    }else{
+      return `## ${this.title}\n`;
+    }
   }
 
 }

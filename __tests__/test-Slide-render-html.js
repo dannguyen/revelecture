@@ -4,7 +4,7 @@ import Slide from '../src/lib/Slide';
 describe("Slide renderHTML()", () => {
   it("should render Markdown :content as HTML", () => {
     let slide = new Slide({content: '### Hello *world*', meta: {}})
-    expect(slide.renderHTML()).toEqual('<h3 id="hello-world-">Hello <em>world</em></h3>');
+    expect(slide.renderHTML()).toEqual('<h3 id="hello-world-">Hello <em>world</em></h3>\n');
   });
 
   describe("rendering of meta elements as HTML", () => {
@@ -26,7 +26,11 @@ describe("Slide renderHTML()", () => {
       it("should render set title as h2 tags", () => {
         expect(htmlLines[0]).toEqual(`<h2 id="my-title">My title</h2>`);
       })
-    })
 
+      it("should render as H1 if section: true", () => {
+          let secSlide = new Slide({content: '', meta: {title: "new section", section: true}})
+          expect(secSlide.renderHTML()).toEqual(`<h1 class="section-title" id="new-section">new section</h1>\n`)
+      })
+    })
   });
 });

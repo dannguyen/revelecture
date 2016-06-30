@@ -44,6 +44,10 @@ describe('Slide constructor', () => {
       expect(slide.title).toEqual("My title");
     });
 
+    it('should not be a sectionTitle unless section: true', () => {
+      expect(slide.sectionTitle).toBe(false);
+    })
+
     it('should derive notes but not render them yet as HTML via markdown', () => {
       expect(slide.notes).toEqual("  # These notes  ");
     });

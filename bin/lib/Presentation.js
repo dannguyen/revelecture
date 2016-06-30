@@ -57,7 +57,7 @@ var revealjs_required_path = _path2.default.resolve(require.resolve('reveal'));
 //     </body>
 // </html>`);
 
-var slideshowTemplate = _handlebars2.default.compile('<html>\n    <head>\n    <link rel="stylesheet" href="assets/stylesheets/reveal.css">\n        <link rel="stylesheet" href="assets/stylesheets/slideshow.css">\n    </head>\n    <body>\n        <div class="reveal">\n            <div class="slides">\n              {{#each slides as |slide|}}\n                 {{{slide}}}\n              {{/each}}\n            </div>\n        </div>\n        <script src="assets/javascript/reveal.js"></script>\n        <script>\n            Reveal.initialize();\n        </script>\n    </body>\n</html>');
+var slideshowTemplate = _handlebars2.default.compile('<html>\n    <head>\n        <link rel="stylesheet" href="assets/stylesheets/theme.css">\n        <link rel="stylesheet" href="assets/stylesheets/reveal.css">\n        <link rel="stylesheet" href="assets/stylesheets/slideshow.css">\n    </head>\n    <body class="slideshow">\n        <div class="reveal">\n            <div class="slides">\n              {{#each slides as |slide|}}\n                 {{{slide}}}\n              {{/each}}\n            </div>\n        </div>\n        <script src="assets/javascript/reveal.js"></script>\n        <script src="assets/javascript/reveal-initialize.js"></script>\n    </body>\n</html>');
 
 var Presentation = function () {
   function Presentation(srcPath) {
