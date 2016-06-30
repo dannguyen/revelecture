@@ -3,6 +3,7 @@ import path from 'path';
 import Handlebars from 'handlebars';
 import contentParser from './contentParser';
 import Slide from './Slide';
+import pretty from 'pretty';
 
 let revealjs_required_path = path.resolve(require.resolve('reveal'));
 
@@ -71,10 +72,9 @@ export default class Presentation{
 
 
   renderSlideshow(){
-    return slideshowTemplate({
-      slides: this.slides.map(slide => slide.renderSlide()),
-      revealjs_path: revealjs_required_path
-    })
+    return pretty(slideshowTemplate({
+                    slides: this.slides.map(slide => slide.renderSlide()),
+                    revealjs_path: revealjs_required_path}));
   }
 
   renderOverview(){

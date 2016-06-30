@@ -28,7 +28,7 @@ describe('Slide constructor', () => {
     })
   })
 
-  describe("meta attributes", () => {
+  describe("passing of meta attributes to Slide constructor", () => {
     let meta = {
       title: "  My title ",
       notes: "  # These notes  ",
@@ -55,18 +55,11 @@ describe('Slide constructor', () => {
   });
 
 
-  describe("renderHTML()", () => {
-    it("should render Markdown :content as HTML", () => {
-      let slide = new Slide({content: '### Hello *world*', meta: {}})
-      expect(slide.renderHTML()).toEqual('<h3 id="hello-world-">Hello <em>world</em></h3>');
-    });
-  });
-
   describe("renderSlide()", () => {
     it(`should contain a section class="slide"`, () => {
       let slide = new Slide({content: '### Hello *world*', meta: {}})
-      let html = slide.renderSlide();
-      expect(html).toContain('<h3 id="hello-world-">Hello <em>world</em></h3>');
+      let html = slide.renderSlide().replace(/\s+/g, ' ');
+      expect(html).toContain('<h3 id="hello-world-">Hello <em>world</em> </h3>');
       expect(html).toMatch(/<section class=".*?slide.*?"/);
     });
   });

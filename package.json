@@ -4,9 +4,10 @@
   "main": "index.js",
   "description": "A command-line tool to turn Markdown files into Reveal.js powered slideshows",
   "scripts": {
-    "clean": "mkdir -p bin; rm -rf bin/*",
+    "clean": "mkdir -p bin; rm -rf bin/*; mkdir -p build; rm -rf build",
     "compile": "npm run clean; babel src/index.js --out-file bin/cli.js; babel src/lib --out-dir bin/lib",
     "test": "jest",
+    "build": "npm run clean; babel-node src/index.js make ./examples/hello-slides ./build/hello-slides",
     "prepublish": "npm run compile"
   },
   "repository": {
@@ -26,11 +27,14 @@
   "homepage": "https://github.com/dannguyen/revelecture#readme",
   "dependencies": {
     "commander": "^2.9.0",
+    "front-matter": "^2.1.0",
     "fs-extra": "^0.30.0",
     "glob": "^7.0.5",
     "handlebars": "^4.0.5",
+    "lodash": "^4.13.1",
     "marked": "^0.3.5",
     "open": "0.0.5",
+    "pretty": "^1.0.0",
     "reveal": "0.0.4"
   },
   "bin": {
@@ -42,6 +46,7 @@
     "babel-jest": "^12.1.0",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
-    "jest-cli": "^12.1.1"
+    "jest-cli": "^12.1.1",
+    "temp": "^0.8.3"
   }
 }

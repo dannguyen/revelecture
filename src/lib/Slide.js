@@ -1,6 +1,8 @@
 import {InvalidSlideObjectError} from './SlideErrors'
 import Handlebars from 'handlebars';
 import marked from 'marked';
+import _ from 'lodash';
+import pretty from 'pretty';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -13,16 +15,15 @@ export const slideTemplate = Handlebars.compile(`<section class="slide">{{{ cont
 
 export default class Slide{
   constructor(object){
-    if (!(typeof object.content === 'string' && typeof object.meta === 'object' && object.meta)){
+    if (!(_.isString(object.content) && _.isPlainObject(object.meta))){
       throw new InvalidSlideObjectError();
     }
     this.content = object.content.trim();
     this._meta = object.meta;
-    this.title = this._meta.title !== undefined ? this._meta.title.trim() : undefined;
+    this.title = _.isEmpty(this._meta.title) ? undefined : _.trim(this._meta.title);
     this.notes = this._meta.notes;
     this.transition = this._meta.transition;
     this.transition_speed = this._meta.transition_speed;
-
   }
   //
   // attributes:
@@ -39,12 +40,18 @@ export default class Slide{
   //     video-muted:
   //     iframe:
 
+
+
+
   renderHTML(){
-    return marked(this.content).trim();
+    let html = "";
+    html += this._HTMLtitle();
+    html += marked(this.content).trim();
+    return html;
   }
 
   renderSlide(){
-    return slideTemplate({content: this.renderHTML()});
+    return pretty(slideTemplate({content: this.renderHTML()}));
   }
 
   renderSection(){
@@ -52,4 +59,9 @@ export default class Slide{
   }
 
   _render(format){ }
+
+  _HTMLtitle(){
+    return _.isEmpty(this.title) ? "" : marked(`## ${this.title}`) + '\n';
+  }
+
 }

@@ -26,13 +26,38 @@ var _Slide = require('./Slide');
 
 var _Slide2 = _interopRequireDefault(_Slide);
 
+var _pretty = require('pretty');
+
+var _pretty2 = _interopRequireDefault(_pretty);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var revealjs_required_path = _path2.default.resolve(require.resolve('reveal'));
 
-var slideshowTemplate = _handlebars2.default.compile('<html>\n    <head>\n      {{#each stylesheets as |css_path|}}\n        <link rel="stylesheet" href="{{css_path}}">\n      {{/each}}\n    </head>\n    <body>\n        <div class="reveal">\n            <div class="slides">\n              {{#each slides as |slide|}}\n                 {{{slide}}}\n              {{/each}}\n            </div>\n        </div>\n        <script src="{{revealjs_path}}"></script>\n        <script>\n            Reveal.initialize();\n        </script>\n    </body>\n</html>');
+// const slideshowTemplate = Handlebars.compile(`<html>
+//     <head>
+//       {{#each stylesheets as |css_path|}}
+//         <link rel="stylesheet" href="{{css_path}}">
+//       {{/each}}
+//     </head>
+//     <body>
+//         <div class="reveal">
+//             <div class="slides">
+//               {{#each slides as |slide|}}
+//                  {{{slide}}}
+//               {{/each}}
+//             </div>
+//         </div>
+//         <script src="{{revealjs_path}}"></script>
+//         <script>
+//             Reveal.initialize();
+//         </script>
+//     </body>
+// </html>`);
+
+var slideshowTemplate = _handlebars2.default.compile('<html>\n    <head>\n    <link rel="stylesheet" href="assets/stylesheets/reveal.css">\n        <link rel="stylesheet" href="assets/stylesheets/slideshow.css">\n    </head>\n    <body>\n        <div class="reveal">\n            <div class="slides">\n              {{#each slides as |slide|}}\n                 {{{slide}}}\n              {{/each}}\n            </div>\n        </div>\n        <script src="assets/javascript/reveal.js"></script>\n        <script>\n            Reveal.initialize();\n        </script>\n    </body>\n</html>');
 
 var Presentation = function () {
   function Presentation(srcPath) {
@@ -60,12 +85,11 @@ var Presentation = function () {
   }, {
     key: 'renderSlideshow',
     value: function renderSlideshow() {
-      return slideshowTemplate({
+      return (0, _pretty2.default)(slideshowTemplate({
         slides: this.slides.map(function (slide) {
           return slide.renderSlide();
         }),
-        revealjs_path: revealjs_required_path
-      });
+        revealjs_path: revealjs_required_path }));
     }
   }, {
     key: 'renderOverview',
