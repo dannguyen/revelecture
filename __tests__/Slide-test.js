@@ -3,7 +3,6 @@ import Slide from '../src/lib/Slide';
 import {InvalidSlideObjectError} from '../src/lib/SlideErrors';
 
 describe('Slide constructor', () => {
-
   describe("minimal object", () => {
     let error_message = "Argument must be an Object: { content: [String], meta: [Object] }";
     it('accepts an object, exclusively', () => {

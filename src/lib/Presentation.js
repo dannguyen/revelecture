@@ -4,13 +4,33 @@ import Handlebars from 'handlebars';
 import contentParser from './contentParser';
 import Slide from './Slide';
 
-let revealjs_required_path = path.resolve(require.resolve('reveal')); 
+let revealjs_required_path = path.resolve(require.resolve('reveal'));
+
+// const slideshowTemplate = Handlebars.compile(`<html>
+//     <head>
+//       {{#each stylesheets as |css_path|}}
+//         <link rel="stylesheet" href="{{css_path}}">
+//       {{/each}}
+//     </head>
+//     <body>
+//         <div class="reveal">
+//             <div class="slides">
+//               {{#each slides as |slide|}}
+//                  {{{slide}}}
+//               {{/each}}
+//             </div>
+//         </div>
+//         <script src="{{revealjs_path}}"></script>
+//         <script>
+//             Reveal.initialize();
+//         </script>
+//     </body>
+// </html>`);
 
 const slideshowTemplate = Handlebars.compile(`<html>
     <head>
-      {{#each stylesheets as |css_path|}}
-        <link rel="stylesheet" href="{{css_path}}">
-      {{/each}}
+    <link rel="stylesheet" href="assets/stylesheets/reveal.css">
+        <link rel="stylesheet" href="assets/stylesheets/slideshow.css">
     </head>
     <body>
         <div class="reveal">
@@ -20,13 +40,12 @@ const slideshowTemplate = Handlebars.compile(`<html>
               {{/each}}
             </div>
         </div>
-        <script src="{{revealjs_path}}"></script>
+        <script src="assets/javascript/reveal.js"></script>
         <script>
             Reveal.initialize();
         </script>
     </body>
 </html>`);
-
 
 
 export default class Presentation{
