@@ -67,8 +67,8 @@ var Slide = function () {
   //     iframe:
 
   _createClass(Slide, [{
-    key: 'renderHTML',
-    value: function renderHTML() {
+    key: 'renderBody',
+    value: function renderBody() {
       var html = "";
       html += this._mdTitle();
       html += _lodash2.default.trim(this.content);
@@ -80,7 +80,7 @@ var Slide = function () {
   }, {
     key: 'renderSlide',
     value: function renderSlide() {
-      return (0, _pretty2.default)(slideTemplate({ content: this.renderHTML() }));
+      return (0, _pretty2.default)(slideTemplate({ content: this.renderBody() }));
     }
   }, {
     key: '_render',

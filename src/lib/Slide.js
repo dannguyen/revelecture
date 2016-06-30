@@ -2,7 +2,6 @@ import {InvalidSlideObjectError} from './SlideErrors'
 import Handlebars from 'handlebars';
 import marked from 'marked';
 import _ from 'lodash';
-import pretty from 'pretty';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -10,14 +9,20 @@ marked.setOptions({
 });
 
 
-export const htmlTemplate = Handlebars.compile(`
-<div class="content">{{{ content }}}</div>
-{{#if notes}}<div class="notes">{{{ notes }}}</div>{{/if}}`)
+export const htmlTemplate = Handlebars.compile(`<div class="content">{{{ content }}}</div>`)
 
 export const slideTemplate = Handlebars.compile(`
 <section class="section slide">
   {{{ slideContent }}}
+  {{#if notes}}<aside class="notes">{{{ notes }}}</aside>{{/if}}
 </section>`);
+
+export const articleTemplate = Handlebars.compile(`
+<section class="section article">
+  {{{ slideContent }}}
+  {{#if notes}}<div class="notes">{{{ notes }}}</div>{{/if}}
+</section>`);
+
 
 
 export default class Slide{
@@ -35,9 +40,9 @@ export default class Slide{
   }
   //
   // attributes:
-  // - title
-  // - cover_slide: true
-  // - notes
+  // - title: text
+  // - section: true/false
+  // - notes: markdown text
   // - transition
   // - background:
   //     color:
@@ -51,21 +56,24 @@ export default class Slide{
 
 
 
-  renderHTML(){
-    let notes = this._htmlNotes(),
-        content = "";
+  renderBody(){
+    let content = "";
     content += this._mdTitle();
     content += marked(this.content);
 
-    return _.trim(htmlTemplate({content: content, notes: notes}));
+    return _.trim(htmlTemplate({ content: content }));
   }
 
   renderArticle(){
-
+    let _slidecontent = this.renderBody();
+    let _notes = this._htmlNotes();
+    return articleTemplate({slideContent: _slidecontent, notes: _notes});
   }
 
   renderSlide(){
-    return pretty(slideTemplate({slideContent: this.renderHTML()}));
+    let _slidecontent = this.renderBody();
+    let _notes = this._htmlNotes();
+    return slideTemplate({slideContent: _slidecontent, notes: _notes});
   }
 
 
@@ -83,7 +91,7 @@ export default class Slide{
 
   _htmlNotes(){
     if (_.isEmpty(this.notes)){ return ""; }
-    return `\n<aside class="notes">${marked(this.notes)}</aside>`
+    return `${marked(this.notes)}`
   }
 
 }

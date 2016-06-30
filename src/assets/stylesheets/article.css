@@ -1,0 +1,51 @@
+body.revelecture-article{
+  max-width: 990px;
+  padding: 0 15px;
+}
+
+
+.section.article{
+  margin-bottom: 2.0rem;
+  position: relative;
+}
+
+.section.article:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+
+
+.section.article .notes{
+  float: left;
+  margin-right: 2%;
+  width: 60%;
+}
+
+.section.article .notes h1,
+.section.article .notes h2,
+.section.article .notes h3{
+  font-size: 0.7rem;
+}
+
+
+.section.article .content{
+  border: thin solid red;
+  padding: 10px;
+  font-size: 0.7rem;
+  float: right;
+  width: 35%;
+}
+
+
+.section.article .content{
+  min-height: 350px;
+  max-height: 350px;
+}
+
+.section.article img{
+  max-width: 100%;
+}

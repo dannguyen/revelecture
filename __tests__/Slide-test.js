@@ -63,7 +63,7 @@ describe('Slide constructor', () => {
     it(`should contain a section class="slide"`, () => {
       let slide = new Slide({content: '### Hello *world*', meta: {}})
       let html = slide.renderSlide().replace(/\s+/g, ' ');
-      expect(html).toContain('<h3 id="hello-world-">Hello <em>world</em> </h3>');
+      expect(html).toContain('<h3 id="hello-world-">Hello <em>world</em></h3>');
       expect(html).toMatch(/<section class=".*?slide.*?"/);
     });
   });

@@ -22,17 +22,22 @@ export default function addMake(proggy){
           fs.mkdirpSync(destPath)
       }
 
-      let destPathSlideshow = path.join(destPath, 'slideshow.html');
       let presentation = new Presentation(srcPath);
-      // console.log(presentation.renderSlideshow());
+
       // write the slideshow.html
+      let destPathSlideshow = path.join(destPath, 'slideshow.html');
       fs.writeFileSync(destPathSlideshow, presentation.renderSlideshow());
       console.log(`Created ${destPathSlideshow}`);
+
+      // write the article.html
+      let destPathArticle = path.join(destPath, 'article.html');
+      fs.writeFileSync(destPathArticle, presentation.renderArticle());
+      console.log(`Created ${destPathArticle}`);
 
       // copy over assets
       let destStylesPath = path.join(destPath, 'assets', 'stylesheets');
       fs.mkdirpSync(destStylesPath);
-      ['reveal.css', 'slideshow.css', 'theme.css'].forEach(af => {
+      ['article.css', 'reveal.css', 'slideshow.css', 'theme.css'].forEach(af => {
         fs.copySync(path.join(srcStylesPath, af), path.join(destStylesPath, af))
       });
 

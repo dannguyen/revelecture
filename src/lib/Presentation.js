@@ -5,7 +5,7 @@ import contentParser from './contentParser';
 import Slide from './Slide';
 import pretty from 'pretty';
 
-let revealjs_required_path = path.resolve(require.resolve('reveal'));
+// let revealjs_required_path = path.resolve(require.resolve('reveal'));
 
 // const slideshowTemplate = Handlebars.compile(`<html>
 //     <head>
@@ -28,13 +28,30 @@ let revealjs_required_path = path.resolve(require.resolve('reveal'));
 //     </body>
 // </html>`);
 
+const articleTemplate = Handlebars.compile(`<html>
+    <head>
+        <link rel="stylesheet" href="assets/stylesheets/theme.css">
+        <link rel="stylesheet" href="assets/stylesheets/article.css">
+    </head>
+    <body class="revelecture revelecture-article">
+        <article>
+            <div class="articles">
+              {{#each articles as |article|}}
+                 {{{article}}}
+              {{/each}}
+            </div>
+        </article>
+    </body>
+</html>`);
+
+
 const slideshowTemplate = Handlebars.compile(`<html>
     <head>
         <link rel="stylesheet" href="assets/stylesheets/theme.css">
         <link rel="stylesheet" href="assets/stylesheets/reveal.css">
         <link rel="stylesheet" href="assets/stylesheets/slideshow.css">
     </head>
-    <body class="slideshow">
+    <body class="revelecture revelecture-slideshow">
         <div class="reveal">
             <div class="slides">
               {{#each slides as |slide|}}
@@ -72,12 +89,14 @@ export default class Presentation{
 
   renderSlideshow(){
     return pretty(slideshowTemplate({
-                    slides: this.slides.map(slide => slide.renderSlide()),
-                    revealjs_path: revealjs_required_path}));
+                    slides: this.slides.map(o => o.renderSlide())}
+                  ));
   }
 
-  renderOverview(){
-
+  renderArticle(){
+    return pretty(articleTemplate({
+                    articles: this.slides.map(o => o.renderArticle())}
+                  ));
   }
 
   render(){

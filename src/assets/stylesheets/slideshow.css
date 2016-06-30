@@ -13,6 +13,14 @@
  * GLOBAL STYLES
  *********************************************/
 
+html,body{
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  line-height: 1;
+}
 
 ::selection {
   color: #fff;
