@@ -1,6 +1,6 @@
 /**
- * Blood theme for reveal.js
- * Author: Walther http://github.com/Walther
+ * (Altered) Blood theme for reveal.js
+ * Original Author: Walther http://github.com/Walther
  *
  * Designed to be used with highlight.js theme
  * "monokai_sublime.css" available from
@@ -9,6 +9,25 @@
  * For other themes, change $codeBackground accordingly.
  *
  */
+
+/***
+My styles
+***/
+
+
+.slide h1 {
+  font-size: 2.30em; }
+
+.slide h2 {
+  font-size: 1.6em; }
+
+.slide h3 {
+  font-size: 1.30em; }
+
+.slide h4 {
+  font-size: 1.10em; }
+
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -85,7 +104,7 @@ body {
 .reveal dd {
   margin-left: 40px; }
 
-.reveal q,
+/*.reveal q,
 .reveal blockquote {
   quotes: none; }
 
@@ -101,7 +120,7 @@ body {
 
 .reveal blockquote p:first-child,
 .reveal blockquote p:last-child {
-  display: inline-block; }
+  display: inline-block; }*/
 
 .reveal q {
   font-style: italic; }
@@ -123,7 +142,6 @@ body {
 
 .reveal pre code {
   display: block;
-  padding: 5px;
   overflow: auto;
   max-height: 400px;
   word-wrap: normal; }

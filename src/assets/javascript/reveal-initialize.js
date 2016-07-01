@@ -1,7 +1,7 @@
 Reveal.initialize(
   {
     autoSlide: 0,
-    center: false,
+    center: true,
     embedded: false,
     fragments: true,
     hideAddressBar: true,
@@ -12,6 +12,9 @@ Reveal.initialize(
     showNotes: false,
     shuffle: false,
     transition: 'default',
-    transitionSpeed: 'default'    
+    transitionSpeed: 'default',
+    dependencies: [
+          { src: 'assets/javascript/plugins/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    ]
   }
 );

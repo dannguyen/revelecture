@@ -19,8 +19,15 @@ export const slideTemplate = Handlebars.compile(`
 
 export const articleTemplate = Handlebars.compile(`
 <section class="section article">
-  {{{ slideContent }}}
-  {{#if notes}}<div class="notes">{{{ notes }}}</div>{{/if}}
+  <section class="row">
+    <div class="col-sm-8">
+      {{#if notes}}<div class="notes">{{{ notes }}}</div>{{/if}}
+      <br>
+    </div>
+    <div class="col-sm-4">
+      {{{ slideContent }}}
+    </div>
+  </section>
 </section>`);
 
 
@@ -59,9 +66,9 @@ export default class Slide{
   renderBody(){
     let content = "";
     content += this._mdTitle();
-    content += marked(this.content);
+    content += `<div class="content-body">${marked(this.content)}</div>`;
 
-    return _.trim(htmlTemplate({ content: content }));
+    return htmlTemplate({ content: content });
   }
 
   renderArticle(){
@@ -83,9 +90,9 @@ export default class Slide{
     if (_.isEmpty(this.title)){ return ""; }
     let tslug = this.title.toLowerCase().replace(/[^\w]+/g, '-'); // this comes from marked
     if (this.sectionTitle === true){
-      return `<h1 class="section-title title" id="${tslug}">${this.title}</h1>`
+      return `<h1 class="section-title content-title" id="${tslug}">${this.title}</h1>`
     }else{
-      return `<h2 class="content-title title" id="${tslug}">${this.title}</h2>`;
+      return `<h2 class="content-title" id="${tslug}">${this.title}</h2>`;
     }
   }
 

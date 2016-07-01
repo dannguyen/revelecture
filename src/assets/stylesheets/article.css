@@ -1,29 +1,29 @@
-body.revelecture-article{
+/*body.revelecture-article{
   max-width: 990px;
   padding: 0 15px;
 }
-
+*/
 
 .section.article{
-  margin-bottom: 2.0rem;
+  margin-top: 2.0rem;
   position: relative;
 }
 
-.section.article:after {
+/*.section.article:after {
    content: " "; /* Older browser do not support empty content */
    visibility: hidden;
    display: block;
    height: 0;
    clear: both;
-}
+}*/
 
 
 
-.section.article .notes{
+/*.section.article .notes{
   float: left;
   margin-right: 2%;
   width: 60%;
-}
+}*/
 
 .section.article .notes h1,
 .section.article .notes h2,
@@ -32,17 +32,20 @@ body.revelecture-article{
 }
 
 
-.section.article .content{
+
+/*.section.article .content{
   border: thin solid red;
   padding: 10px;
   font-size: 0.7rem;
   float: right;
   width: 35%;
 }
-
+*/
 
 .section.article .content{
-  min-height: 350px;
+  border: thin solid red;
+  padding: 1.0em;
+  min-height: 200px;
   max-height: 350px;
 }
 

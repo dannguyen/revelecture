@@ -32,14 +32,16 @@ const articleTemplate = Handlebars.compile(`<html>
     <head>
         <link rel="stylesheet" href="assets/stylesheets/theme.css">
         <link rel="stylesheet" href="assets/stylesheets/article.css">
+        <link rel="stylesheet" href="assets/stylesheets/code.css">
+        <link rel="stylesheet" href="assets/stylesheets/grid.css">
     </head>
     <body class="revelecture revelecture-article">
-        <article>
-            <div class="articles">
-              {{#each articles as |article|}}
-                 {{{article}}}
-              {{/each}}
-            </div>
+        <article class="articles">
+          <div class="container">
+            {{#each articles as |article|}}
+               {{{article}}}
+            {{/each}}
+          </div>
         </article>
     </body>
 </html>`);
@@ -48,6 +50,7 @@ const articleTemplate = Handlebars.compile(`<html>
 const slideshowTemplate = Handlebars.compile(`<html>
     <head>
         <link rel="stylesheet" href="assets/stylesheets/theme.css">
+        <link rel="stylesheet" href="assets/stylesheets/code.css">
         <link rel="stylesheet" href="assets/stylesheets/reveal.css">
         <link rel="stylesheet" href="assets/stylesheets/slideshow.css">
     </head>
@@ -59,6 +62,7 @@ const slideshowTemplate = Handlebars.compile(`<html>
               {{/each}}
             </div>
         </div>
+        <script src="assets/javascript/plugins/head.js"></script>
         <script src="assets/javascript/reveal.js"></script>
         <script src="assets/javascript/reveal-initialize.js"></script>
     </body>

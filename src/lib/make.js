@@ -37,14 +37,14 @@ export default function addMake(proggy){
       // copy over assets
       let destStylesPath = path.join(destPath, 'assets', 'stylesheets');
       fs.mkdirpSync(destStylesPath);
-      ['article.css', 'reveal.css', 'slideshow.css', 'theme.css'].forEach(af => {
+      ['article.css', 'reveal.css', 'slideshow.css', 'theme.css', 'code.css', 'grid.css'].forEach(af => {
         fs.copySync(path.join(srcStylesPath, af), path.join(destStylesPath, af))
       });
 
-
+      // copy reveal JS
       let destJSPath = path.join(destPath, 'assets', 'javascript');
       fs.mkdirpSync(destJSPath);
-      ['reveal.js', 'reveal-initialize.js'].forEach(af => {
+      ['reveal.js', 'reveal-initialize.js', 'plugins'].forEach(af => {
         fs.copySync(path.join(srcJSPath, af), path.join(destJSPath, af))
       });
 
