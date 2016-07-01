@@ -1,4 +1,4 @@
-import {InvalidSlideObjectError} from './SlideErrors'
+import {InvalidAnecdotalError} from './AnecdotalErrors'
 import Handlebars from 'handlebars';
 import marked from 'marked';
 import _ from 'lodash';
@@ -12,13 +12,13 @@ marked.setOptions({
 export const htmlTemplate = Handlebars.compile(`<div class="content">{{{ content }}}</div>`)
 
 export const slideTemplate = Handlebars.compile(`
-<section class="section slide">
+<section class="anecdote slide">
   {{{ slideContent }}}
   {{#if notes}}<aside class="notes">{{{ notes }}}</aside>{{/if}}
 </section>`);
 
 export const articleTemplate = Handlebars.compile(`
-<section class="section article">
+<section class="anecdote article">
   <section class="row">
     <div class="col-sm-8">
       {{#if notes}}<div class="notes">{{{ notes }}}</div>{{/if}}
@@ -32,10 +32,10 @@ export const articleTemplate = Handlebars.compile(`
 
 
 
-export default class Slide{
+export default class Anecdote{
   constructor(object){
     if (!(_.isString(object.content) && _.isPlainObject(object.meta))){
-      throw new InvalidSlideObjectError();
+      throw new InvalidAnecdotalError();
     }
     this.content = _.trim(object.content);
     this._meta = object.meta;
@@ -44,6 +44,7 @@ export default class Slide{
     this.notes = _.isEmpty(this._meta.notes) ? undefined : _.trim(this._meta.notes);
     this.transition = this._meta.transition;
     this.transition_speed = this._meta.transition_speed;
+    this.children = this._buildChildren(this._meta.children);
   }
   //
   // attributes:
@@ -99,6 +100,11 @@ export default class Slide{
   _htmlNotes(){
     if (_.isEmpty(this.notes)){ return ""; }
     return `${marked(this.notes)}`
+  }
+
+  _buildChildren(childrenDir){
+    if (_.isEmpty(childrenDir)){ return [] }
+    return [];
   }
 
 }

@@ -15,6 +15,9 @@ describe('contentParser()', () => {
     expect(data.content).toEqual("");
   })
 
+  xit('baseDirectory of anecdote needs to be set somewhere...', () => {})
+  xit('meta.filename should be relative to the base directory', () => {})
+
   it('should have a content value even if no frontmatter is set', () => {
     let tname = tempyfile.create("hello world");
     let data = contentParser(tname);

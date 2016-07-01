@@ -1,34 +1,34 @@
 jest.disableAutomock();
-import Slide from '../src/lib/Slide';
-import {InvalidSlideObjectError} from '../src/lib/SlideErrors';
+import Anecdote from '../src/lib/Anecdote';
+import {InvalidAnecdotalError} from '../src/lib/AnecdotalErrors';
 
 describe('Slide constructor', () => {
   describe("minimal object", () => {
     let error_message = "Argument must be an Object: { content: [String], meta: [Object] }";
     it('accepts an object, exclusively', () => {
-      expect(() => { new Slide("Boo") }).toThrow(new InvalidSlideObjectError);
+      expect(() => { new Anecdote("Boo") }).toThrow(new InvalidAnecdotalError);
     });
 
     it('requires a :content String', () => {
       let obj = {meta: {}}
-      expect(() => { new Slide(obj) }).toThrow(new InvalidSlideObjectError);
+      expect(() => { new Anecdote(obj) }).toThrow(new InvalidAnecdotalError);
     });
 
     it('requires a :meta object', () => {
       let obj = {content: "hello"}
-      expect(() => { new Slide(obj) }).toThrow(new InvalidSlideObjectError);
+      expect(() => { new Anecdote(obj) }).toThrow(new InvalidAnecdotalError);
     });
 
     it('can have meta and content be blank/empty', () => {
       let obj = {content: '', meta: {}};
-      let slide = new Slide(obj)
-      expect(slide.content).toEqual('');
-      expect(slide._meta).toEqual({});
-      expect(slide.title).toBeUndefined();
+      let a = new Anecdote(obj)
+      expect(a.content).toEqual('');
+      expect(a._meta).toEqual({});
+      expect(a.title).toBeUndefined();
     })
   })
 
-  describe("passing of meta attributes to Slide constructor", () => {
+  describe("passing of meta attributes to Anecdote constructor", () => {
     let meta = {
       title: "  My title ",
       notes: "  # These notes  ",
@@ -38,31 +38,31 @@ describe('Slide constructor', () => {
       transition: "fade-in slide-out",
       transition_speed: "fast"
     };
-    let slide = new Slide({content: "This is regular text", meta: meta})
+    let a = new Anecdote({content: "This is regular text", meta: meta})
 
     it('should derive a title, trimmed of white space', () => {
-      expect(slide.title).toEqual("My title");
+      expect(a.title).toEqual("My title");
     });
 
     it('should not be a sectionTitle unless section: true', () => {
-      expect(slide.sectionTitle).toBe(false);
+      expect(a.sectionTitle).toBe(false);
     })
 
     it('should derive notes but not render them yet as HTML via markdown', () => {
-      expect(slide.notes).toEqual("# These notes");
+      expect(a.notes).toEqual("# These notes");
     });
 
     it('should derive transition data as literal strings', () => {
-      expect(slide.transition).toEqual('fade-in slide-out');
-      expect(slide.transition_speed).toEqual('fast');
+      expect(a.transition).toEqual('fade-in slide-out');
+      expect(a.transition_speed).toEqual('fast');
     });
   });
 
 
   describe("renderSlide()", () => {
     it(`should contain a section class="slide"`, () => {
-      let slide = new Slide({content: '### Hello *world*', meta: {}})
-      let html = slide.renderSlide().replace(/\s+/g, ' ');
+      let a = new Anecdote({content: '### Hello *world*', meta: {}})
+      let html = a.renderSlide().replace(/\s+/g, ' ');
       expect(html).toContain('<h3 id="hello-world-">Hello <em>world</em></h3>');
       expect(html).toMatch(/<section class=".*?slide.*?"/);
     });

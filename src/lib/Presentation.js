@@ -2,7 +2,7 @@ import glob from 'glob';
 import path from 'path';
 import Handlebars from 'handlebars';
 import contentParser from './contentParser';
-import Slide from './Slide';
+import Anecdote from './Anecdote';
 import pretty from 'pretty';
 
 // let revealjs_required_path = path.resolve(require.resolve('reveal'));
@@ -74,32 +74,32 @@ export default class Presentation{
     this.srcPath = srcPath;
     this.title = 'Read from YAML or first slide';
     this.description = 'Get this from YAML or first slide';
-    this.slides = this._gather_files(this.srcPath);
+    this.anecdotes = this._gather_anecdotes(this.srcPath);
   }
 
-  _gather_files(src_path){
+  _gather_anecdotes(src_path){
     console.log(`gathering from ${src_path}`)
     let fnames = glob.sync(path.join(src_path, '*.md'));
-    let slides = []
+    let anecdotes = []
     fnames.forEach(fname => {
       console.log(`Processing ${fname}`);
-      slides.push(new Slide(contentParser(fname)));
+      anecdotes.push(new Anecdote(contentParser(fname)));
     })
 
-    return slides;
+    return anecdotes;
   }
 
 
 
   renderSlideshow(){
     return pretty(slideshowTemplate({
-                    slides: this.slides.map(o => o.renderSlide())}
+                    slides: this.anecdotes.map(o => o.renderSlide())}
                   ));
   }
 
   renderArticle(){
     return pretty(articleTemplate({
-                    articles: this.slides.map(o => o.renderArticle())}
+                    articles: this.anecdotes.map(o => o.renderArticle())}
                   ));
   }
 
