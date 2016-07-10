@@ -10,10 +10,13 @@ let srcStylesPath = path.resolve(path.join('.', 'src', 'assets', 'stylesheets'))
 
 
 export default function addMake(proggy){
-  return proggy.command('make <src> <dest>')
-    .action((src, dest) => {
+  return proggy.command('make <src>')
+    .alias('m')
+    .description('Makes a complete presentation, including slideshow and article form of <src> directory')
+    .option('-o, --output-dir <dest>', 'Output directory. By default, the presentation is added to the <dest>')
+    .action((src, options) => {
       let srcPath = path.resolve(src);
-      let destPath = path.resolve(dest);
+      let destPath = path.resolve(options.outputDir);
       console.log("Reading from " + srcPath + '!!');
       console.log("Writing to " + destPath + '!!');
 
@@ -47,7 +50,5 @@ export default function addMake(proggy){
       ['reveal.js', 'reveal-initialize.js', 'plugins'].forEach(af => {
         fs.copySync(path.join(srcJSPath, af), path.join(destJSPath, af))
       });
-
-
     });
 };

@@ -79,7 +79,7 @@ export default class Presentation{
 
   _gather_anecdotes(src_path){
     console.log(`gathering from ${src_path}`)
-    let fnames = glob.sync(path.join(src_path, '*.md'));
+    let fnames = glob.sync(path.join(src_path, '**', '*.md'));
     let anecdotes = []
     fnames.forEach(fname => {
       console.log(`Processing ${fname}`);

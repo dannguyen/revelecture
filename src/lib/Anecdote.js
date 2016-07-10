@@ -1,4 +1,4 @@
-import {InvalidAnecdotalError} from './AnecdotalErrors'
+import {InvalidAnecdotalError, InvalidAnecdotalIframe} from './AnecdotalErrors'
 import Handlebars from 'handlebars';
 import marked from 'marked';
 import _ from 'lodash';
@@ -10,9 +10,8 @@ marked.setOptions({
 
 
 export const htmlTemplate = Handlebars.compile(`<div class="content">{{{ content }}}</div>`)
-
 export const slideTemplate = Handlebars.compile(`
-<section class="anecdote slide">
+<section class="anecdote slide" {{#if iframe}}data-background-iframe="{{iframe.src}}"{{/if}}>
   {{{ slideContent }}}
   {{#if notes}}<aside class="notes">{{{ notes }}}</aside>{{/if}}
 </section>`);
@@ -45,6 +44,14 @@ export default class Anecdote{
     this.transition = this._meta.transition;
     this.transition_speed = this._meta.transition_speed;
     this.children = this._buildChildren(this._meta.children);
+
+    // iframe stuff
+    this.iframe = this._meta.iframe;
+    if (!_.isUndefined(this.iframe)){
+      if (_.isUndefined(this.iframe.src)){
+        throw new InvalidAnecdotalIframe(":iframe attribute must have :src attribute pointing to URL");
+      }
+    }
   }
   //
   // attributes:
@@ -67,6 +74,7 @@ export default class Anecdote{
   renderBody(){
     let content = "";
     content += this._mdTitle();
+    content += this._mkIframe();
     content += `<div class="content-body">${marked(this.content)}</div>`;
 
     return htmlTemplate({ content: content });
@@ -74,18 +82,28 @@ export default class Anecdote{
 
   renderArticle(){
     let _slidecontent = this.renderBody();
-    let _notes = this._htmlNotes();
+    let _notes = this.htmlNotes();
     return articleTemplate({slideContent: _slidecontent, notes: _notes});
   }
 
   renderSlide(){
     let _slidecontent = this.renderBody();
-    let _notes = this._htmlNotes();
-    return slideTemplate({slideContent: _slidecontent, notes: _notes});
+    let _notes = this.htmlNotes();
+    return slideTemplate({
+      slideContent: _slidecontent,
+      notes: _notes,
+      iframe: this.iframe
+    });
   }
 
 
-  _render(format){ }
+  htmlNotes(){
+    if (_.isEmpty(this.notes)){ return ""; }
+    return `${marked(this.notes)}`
+  }
+
+
+
 
   _mdTitle(){
     if (_.isEmpty(this.title)){ return ""; }
@@ -97,9 +115,13 @@ export default class Anecdote{
     }
   }
 
-  _htmlNotes(){
-    if (_.isEmpty(this.notes)){ return ""; }
-    return `${marked(this.notes)}`
+  _mkIframe(){
+    if (this.iframe){
+      // return `<iframe data-src="${this.iframe.src}"></iframe>`
+      return ``
+    }else{
+      return "";
+    }
   }
 
   _buildChildren(childrenDir){

@@ -5,7 +5,12 @@ describe('running the presentation maker', () => {
 
     });
 
-    xit('should compile all JS into revelecture.js', () => {
+    xit('should compile all Reveal.js and plugins into revelecture-reveal/*.js', () => {
+
+    });
+
+
+    xit('should compile all non-reveal JS into revelecture.js', () => {
 
     });
   })
