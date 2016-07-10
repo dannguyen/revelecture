@@ -1,7 +1,7 @@
 'use strict'
 import fs from 'fs-extra';
 import path from 'path';
-import Presentation from './Presentation'
+import Presentation from './../Presentation'
 
 let revealPath = path.dirname(require.resolve('reveal'))
 let srcJSPath = path.resolve(path.join('.', 'src', 'assets', 'javascript')); // FIX LATER
