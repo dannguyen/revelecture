@@ -8,7 +8,7 @@ let srcStylesPath = path.resolve(path.join('.', 'src', 'assets', 'stylesheets'))
 
 
 
-export default function addMake(proggy){
+export default function addMakeCommand(proggy){
   return proggy.command('make <src>')
     .alias('m')
     .description('Makes a complete presentation, including slideshow and article form of <src> directory')

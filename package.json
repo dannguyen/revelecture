@@ -5,9 +5,9 @@
   "description": "A command-line tool to turn Markdown files into Reveal.js powered slideshows",
   "scripts": {
     "clean": "mkdir -p bin; rm -rf bin/*",
-    "compile": "npm run clean; babel src/index.js --out-file bin/cli.js; babel src/lib --out-dir bin/lib",
+    "compile": "npm run clean; babel index.js --out-file bin/cli.js; babel src/lib --out-dir bin/lib",
     "test": "jest",
-    "foo": "mkdir -p build; rm -rf build/*.*; babel-node src/index.js make ./examples/hello-slides --output-dir ./build/hello-slides && babel-node src/index.js serve ./build/hello-slides/ --project-path ./examples/hello-slides/",
+    "foo": "mkdir -p build;   rm -rf build/*.*;   babel-node index.js make ./examples/hello-slides --output-dir ./build/hello-slides   &&   babel-node index.js serve ./examples/hello-slides/ --output-dir ./build/hello-slides",
     "prepublish": "npm run compile"
   },
   "repository": {
