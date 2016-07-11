@@ -2,6 +2,7 @@ import {InvalidAnecdotalError, InvalidAnecdotalIframe} from './AnecdotalErrors'
 import Handlebars from 'handlebars';
 import marked from 'marked';
 import _ from 'lodash';
+import urlparse from 'url-parse';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -36,38 +37,28 @@ export default class Anecdote{
     if (!(_.isString(object.content) && _.isPlainObject(object.meta))){
       throw new InvalidAnecdotalError();
     }
+    let meta = object.meta;
     this.content = _.trim(object.content);
-    this._meta = object.meta;
-    this.title = _.isEmpty(this._meta.title) ? undefined : _.trim(this._meta.title);
-    this.sectionTitle = this._meta.section === true ? true : false;
-    this.notes = _.isEmpty(this._meta.notes) ? undefined : _.trim(this._meta.notes);
-    this.transition = this._meta.transition;
-    this.transition_speed = this._meta.transition_speed;
-    this.children = this._buildChildren(this._meta.children);
+    this.title = _.isEmpty(meta.title) ? undefined : _.trim(meta.title);
+    this.sectionTitle = meta.section === true ? true : false;
+    this.notes = _.isEmpty(meta.notes) ? undefined : _.trim(meta.notes);
+    this.transition = meta.transition;
+    this.transition_speed = meta.transition_speed;
 
     // iframe stuff
-    this.iframe = this._meta.iframe;
+    this.iframe = meta.iframe;
     if (!_.isUndefined(this.iframe)){
       if (_.isUndefined(this.iframe.src)){
         throw new InvalidAnecdotalIframe(":iframe attribute must have :src attribute pointing to URL");
       }
     }
+    // youtube stuff
+    if (!_.isUndefined(meta.youtube)){
+        // hijack this.iframe (this is dangerous btw)
+        let yurl = urlparse(meta.youtube);
+        this.iframe = {src: `https://www.youtube.com/embed${yurl.pathname}`};
+    }
   }
-  //
-  // attributes:
-  // - title: text
-  // - section: true/false
-  // - notes: markdown text
-  // - transition
-  // - background:
-  //     color:
-  //     image:
-  //     image-repeat:
-  //     video:
-  //     video-loop:
-  //     video-muted:
-  //     iframe:
-
 
 
 
@@ -103,8 +94,6 @@ export default class Anecdote{
   }
 
 
-
-
   _mdTitle(){
     if (_.isEmpty(this.title)){ return ""; }
     let tslug = this.title.toLowerCase().replace(/[^\w]+/g, '-'); // this comes from marked
@@ -123,10 +112,21 @@ export default class Anecdote{
       return "";
     }
   }
-
-  _buildChildren(childrenDir){
-    if (_.isEmpty(childrenDir)){ return [] }
-    return [];
-  }
-
 }
+
+
+
+//
+// attributes:
+// - title: text
+// - section: true/false
+// - notes: markdown text
+// - transition
+// - background:
+//     color:
+//     image:
+//     image-repeat:
+//     video:
+//     video-loop:
+//     video-muted:
+//     iframe:

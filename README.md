@@ -39,3 +39,6 @@ $ revelecture serve OUTPUT_DIRECTORY --project-path SOURCE_DIRECTORY
 - [ ] Create `new` command to initialize a scaffold
 - [ ] `make` should copy assets and other ancillary files
 - [ ] Refactor serve.js:runServer() into localServe() and liveServe()
+- [ ] Add :source => {:url} attribute to Anecdote
+- [ ] Figure out how to fix overlay over youtube embeds
+- [ ] Add an id attribute to anecdotal elements
