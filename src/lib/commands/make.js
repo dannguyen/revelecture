@@ -1,4 +1,3 @@
-'use strict'
 import fs from 'fs-extra';
 import path from 'path';
 import Presentation from './../Presentation'
@@ -25,30 +24,35 @@ export default function addMake(proggy){
           fs.mkdirpSync(destPath)
       }
 
-      let presentation = new Presentation(srcPath);
-
-      // write the slideshow.html
-      let destPathSlideshow = path.join(destPath, 'slideshow.html');
-      fs.writeFileSync(destPathSlideshow, presentation.renderSlideshow());
-      console.log(`Created ${destPathSlideshow}`);
-
-      // write the article.html
-      let destPathArticle = path.join(destPath, 'article.html');
-      fs.writeFileSync(destPathArticle, presentation.renderArticle());
-      console.log(`Created ${destPathArticle}`);
-
-      // copy over assets
-      let destStylesPath = path.join(destPath, 'assets', 'stylesheets');
-      fs.mkdirpSync(destStylesPath);
-      ['article.css', 'reveal.css', 'slideshow.css', 'theme.css', 'code.css', 'grid.css'].forEach(af => {
-        fs.copySync(path.join(srcStylesPath, af), path.join(destStylesPath, af))
-      });
-
-      // copy reveal JS
-      let destJSPath = path.join(destPath, 'assets', 'javascript');
-      fs.mkdirpSync(destJSPath);
-      ['reveal.js', 'reveal-initialize.js', 'plugins'].forEach(af => {
-        fs.copySync(path.join(srcJSPath, af), path.join(destJSPath, af))
-      });
+      buildPresentation(srcPath, destPath);
     });
 };
+
+
+export function buildPresentation(srcPath, destPath){
+  let presentation = new Presentation(srcPath);
+
+  // write the slideshow.html
+  let destPathSlideshow = path.join(destPath, 'slideshow.html');
+  fs.writeFileSync(destPathSlideshow, presentation.renderSlideshow());
+  console.log(`Created ${destPathSlideshow}`);
+
+  // write the article.html
+  let destPathArticle = path.join(destPath, 'article.html');
+  fs.writeFileSync(destPathArticle, presentation.renderArticle());
+  console.log(`Created ${destPathArticle}`);
+
+  // copy over assets
+  let destStylesPath = path.join(destPath, 'assets', 'stylesheets');
+  fs.mkdirpSync(destStylesPath);
+  ['article.css', 'reveal.css', 'slideshow.css', 'theme.css', 'code.css', 'grid.css'].forEach(af => {
+    fs.copySync(path.join(srcStylesPath, af), path.join(destStylesPath, af))
+  });
+
+  // copy reveal JS
+  let destJSPath = path.join(destPath, 'assets', 'javascript');
+  fs.mkdirpSync(destJSPath);
+  ['reveal.js', 'reveal-initialize.js', 'plugins'].forEach(af => {
+    fs.copySync(path.join(srcJSPath, af), path.join(destJSPath, af))
+  });
+}

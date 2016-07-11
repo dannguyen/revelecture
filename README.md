@@ -8,9 +8,24 @@ A command-line tool to turn Markdown files into [Reveal.js powered slideshows](h
 
 (not done)
 
+Quick run: this reads from examples/hello-slides, builds into build/hello-slides, and runs a livereload server.
+
+```sh
+$ npm run foo
+```
+
+
+Make and bake:
+
 
 ```sh
 $ revelecture make SRC_DIRECTORY -o OUTPUT_DIR
+```
+
+Run locally
+
+```sh
+$ revelecture serve OUTPUT_DIRECTORY --project-path SOURCE_DIRECTORY
 ```
 
 
