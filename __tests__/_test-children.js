@@ -1,3 +1,5 @@
+// to be killed
+
 jest.disableAutomock();
 import Anecdote from '../src/lib/Anecdote';
 

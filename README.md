@@ -31,6 +31,11 @@ $ revelecture serve OUTPUT_DIRECTORY --project-path SOURCE_DIRECTORY
 
 # TODOs
 
-
+- [ ] Come up with project folder format, with assets/ folder and config file
+  - [ ] schema for config.yaml
+- [?] Make `make` and `serve` have consistent interfaces
 - [ ] Make `make` command write to input directory, but not overwrite files without `-f`
 - [ ] Recursively read markdown files from directories and make them subslides
+- [ ] Create `new` command to initialize a scaffold
+- [ ] `make` should copy assets and other ancillary files
+- [ ] Refactor serve.js:runServer() into localServe() and liveServe()
