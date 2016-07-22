@@ -11,7 +11,7 @@ let srcStylesPath = path.resolve(path.join('.', 'src', 'assets', 'stylesheets'))
 export default function addMakeCommand(proggy){
   return proggy.command('make <src>')
     .alias('m')
-    .description('Makes a complete presentation, including slideshow and article form of <src> directory')
+    .description('Makes a complete presentation, including slideshow and article form from a <src> directory that follows the base scaffold template')
     .option('-o, --output-dir <dest>', 'Output directory. By default, the presentation is added to the <dest>')
     .action((src, options) => {
       let srcPath = path.resolve(src);

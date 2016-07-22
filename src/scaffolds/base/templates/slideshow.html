@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="stylesheets/theme.css">
+        <link rel="stylesheet" href="stylesheets/code.css">
+        <link rel="stylesheet" href="stylesheets/reveal.css">
+        <link rel="stylesheet" href="stylesheets/slideshow.css">
+    </head>
+    <body class="revelecture revelecture-slideshow">
+        <div class="reveal">
+            <div class="slides">
+              {{#each slides as |slide|}}
+                 {{{slide}}}
+              {{/each}}
+            </div>
+        </div>
+        <script src="javascript/plugins/head.js"></script>
+        <script src="javascript/reveal.js"></script>
+        <script src="javascript/reveal-initialize.js"></script>
+    </body>
+</html>

@@ -9,7 +9,6 @@ describe('running the presentation maker', () => {
 
     });
 
-
     xit('should compile all non-reveal JS into revelecture.js', () => {
 
     });
