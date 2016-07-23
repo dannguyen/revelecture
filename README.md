@@ -37,6 +37,7 @@ $ revelecture serve OUTPUT_DIRECTORY --project-path SOURCE_DIRECTORY
 
 ### Scaffolding
 
+- [ ] Move template file specification parameters into the Presentation function call parameter options
 - [ ] Come up with project folder format, with assets/ folder and config file
 - [ ] schema for config.yaml
 - [ ] Create and copy base stylesheets/ and javascripts/

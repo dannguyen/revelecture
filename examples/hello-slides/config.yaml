@@ -1,0 +1,15 @@
+title: This is a Project Scaffold
+description: |
+  This field is used to populate the page's meta description field. It will also be the notes for the title slide.
+
+
+
+
+paths:
+  slidesDir: slides
+  templates:
+    article: templates/article.html
+    slideshow: templates/slideshow.html
+  output:
+    article: article.html
+    slideshow: slideshow.html

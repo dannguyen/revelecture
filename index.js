@@ -5,6 +5,7 @@ import program from 'commander';
 import addHelloCommand from './src/lib/commands/hello';
 import addScaffoldCommand from './src/lib/commands/scaffold';
 import addMakeCommand from './src/lib/commands/make';
+import addPresentCommand from './src/lib/commands/present';
 import addServeCommand from './src/lib/commands/serve';
 
 program.version(pkg.version)
@@ -13,6 +14,7 @@ program.version(pkg.version)
 addHelloCommand(program);
 addScaffoldCommand(program);
 addMakeCommand(program);
+addPresentCommand(program);
 addServeCommand(program);
 
 

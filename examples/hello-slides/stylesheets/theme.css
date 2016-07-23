@@ -1,0 +1,126 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,700,300italic,700italic);
+
+/*********************************************
+ * RESET STYLES
+ *********************************************/
+
+
+html, body{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+
+
+div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+
+body {
+  background-color: #fff;
+  color: #000;
+}
+
+
+  /*********************************************
+   * MY STYLES
+   *********************************************/
+
+
+body {
+  background: white;
+  background-color: white;
+  font-family: Lato, "Helvetica Neue",  "sans-serif";
+  font-size: 36px;
+  font-weight: normal;
+  color: #232323;
+}
+
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 20px 0;
+  color: #232323;
+  font-family: Lato, "Helvetica Neue", "sans-serif";
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-shadow: 1px 1px 1px #eee;
+  word-wrap: break-word; }
+
+
+/* h1 {
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15); }*/
+
+
+
+/*https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/*/
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.15em;
+  vertical-align: -0.4em;
+  font-family: "Helvetica Neue", "Georgia", "Arial", "sans-serif";
+}
+blockquote p {
+  display: block;
+}
+
+blockquote p:last-child>em{
+  display: block;
+  text-align: right;
+}
+
+blockquote p:first-child {
+  display: inline;
+  text-align: left;
+}
