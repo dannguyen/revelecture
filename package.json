@@ -7,7 +7,9 @@
     "clean": "mkdir -p bin; rm -rf bin/*",
     "compile": "npm run clean; babel index.js --out-file bin/cli.js; babel src/lib --out-dir bin/lib",
     "test": "jest",
-    "foo": "mkdir -p build;   rm -rf build/*.*;   babel-node index.js make ./examples/hello-slides --output-dir ./build/hello-slides   &&   babel-node index.js serve ./examples/hello-slides/ --output-dir ./build/hello-slides",
+    "foopresent": "babel-node index.js present ./examples/hello-slides",
+    "fooserve": "babel-node index.js serve ./examples/hello-slides/",
+    "foo": "npm run foopresent && npm run fooserve",
     "prepublish": "npm run compile"
   },
   "repository": {

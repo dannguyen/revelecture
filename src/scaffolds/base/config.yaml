@@ -1,3 +1,19 @@
-title: This is a Project Scaffold
+title: This is a Revelecture Project Scaffold
 description: |
   This field is used to populate the page's meta description field. It will also be the notes for the title slide.
+
+paths:
+  slides: slides/
+
+  assets:
+    javascript: javascript/
+    stylesheets: stylesheets/
+    images: images/
+
+  templates:
+    article: templates/article.html
+    slideshow: templates/slideshow.html
+
+  output:
+    article: article.html
+    slideshow: slideshow.html

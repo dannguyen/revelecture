@@ -14,7 +14,7 @@ Reveal.initialize(
     transition: 'default',
     transitionSpeed: 'default',
     dependencies: [
-          { src: 'assets/javascript/plugins/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'javascript/plugins/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
     ]
   }
 );

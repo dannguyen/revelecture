@@ -31,9 +31,12 @@ $ revelecture serve OUTPUT_DIRECTORY --project-path SOURCE_DIRECTORY
 
 # TODOs
 
-## Brokenness
+## foo
 
-- [ ] Rewrite presentation.js to require proper scaffold configuration
+- [x] Rewrite presentation.js to require proper scaffold configuration
+- [ ] Fix present/serve command so that if output-dir is NOT srcdir, all files are copied over.
+  - [ ] Read from config.paths javascript and stylesheets to know to copy those files over
+    - [ ] add sass stuff
 
 ### Scaffolding
 

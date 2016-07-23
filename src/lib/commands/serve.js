@@ -12,7 +12,7 @@ import minimatch from 'minimatch';
 import serveIndex from 'serve-index';
 import serveStatic from 'serve-static';
 import tinyLr from 'tiny-lr';
-import {buildPresentation} from './make';
+import {buildPresentation} from './present';
 
 
 const defaultPortNumber = 8888;
@@ -31,7 +31,7 @@ export default function addServeCommand(proggy) {
       let srcPath = path.resolve(srcpath),
           portnum = options.port || defaultPortNumber,
           url = `http://127.0.0.1:${portnum}`;
-      let outputPath = _.isUndefined(options.outputDir) ? wpath : path.resolve(options.outputDir);
+      let outputPath = _.isUndefined(options.outputDir) ? srcPath : path.resolve(options.outputDir);
       console.log(`Attempting to run server at: ${url}
       - Building project from: ${srcPath}
       - Serving project from: ${outputPath}`);

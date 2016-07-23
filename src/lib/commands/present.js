@@ -15,7 +15,7 @@ export default function addPresentCommand(proggy){
 
       if (!fs.existsSync(destPath)) {
           console.log(`Creating dest: ${destPath}`)
-          fs.mkdirpSync(destPath)
+          fs.mkdirpSync(destPath);
       }
 
       buildPresentation(srcPath, destPath);
@@ -26,7 +26,7 @@ export default function addPresentCommand(proggy){
 export function buildPresentation(srcPath, destPath){
   let presentation = new Presentation(srcPath);
 
-  fs.writeFileSync(presentation.slideshowPath, presentation.renderSlideShow());
+  fs.writeFileSync(presentation.slideshowPath, presentation.renderSlideshow());
   console.log(`Created ${presentation.slideshowPath}`);
 
   fs.writeFileSync(presentation.articlePath, presentation.renderArticle());

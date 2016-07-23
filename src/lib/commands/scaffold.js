@@ -42,10 +42,22 @@ notes: |
   This is where you can put notes.
 ---
 
-Markdown formatted content goes here.
+- Add Markdown files into the \`slides/\` directory.
+- Add metadata in \`config.yaml\``)
+    console.log(`Created: ${fillerSlidePath}`);
 
-**Have fun!**`)
-        console.log(`Created: ${fillerSlidePath}`);
+    // TODO: move out later
+    fs.writeFileSync(path.join(slidesDir, '00002-goodbye.md'),
+`---
+title: Have fun!
+---
+
+![Brunswick, MD Pontoon Bridge - via The Library of Congress](images/loc-brunswick-md-pontoon-bridge-potomac-opt.jpg)
+
+Image source: [Brunswick, MD Pontoon Bridge - via The Library of Congress](https://www.flickr.com/photos/library_of_congress/5597849001)
+`);
+
+
   }
 
   if (!fs.existsSync(destPath)) {
@@ -53,7 +65,7 @@ Markdown formatted content goes here.
       fs.mkdirpSync(destPath)
   }
 
-  ['config.yaml', 'stylesheets/', 'javascript/', 'templates/article.html', 'templates/slideshow.html'].forEach(
+  ['config.yaml', 'stylesheets/', 'javascript/', 'images/', 'templates/article.html', 'templates/slideshow.html'].forEach(
     fpath => {
       let dpath = path.join(destPath, fpath)
       if (!fs.existsSync(dpath) || overwriteExistingFiles == true){
@@ -65,28 +77,4 @@ Markdown formatted content goes here.
     }
   )
 
-  //
-  // // write the slideshow.html
-  // let destPathSlideshow = path.join(destPath, 'slideshow.html');
-  // fs.writeFileSync(destPathSlideshow, presentation.renderSlideshow());
-  // console.log(`Created ${destPathSlideshow}`);
-  //
-  // // write the article.html
-  // let destPathArticle = path.join(destPath, 'article.html');
-  // fs.writeFileSync(destPathArticle, presentation.renderArticle());
-  // console.log(`Created ${destPathArticle}`);
-  //
-  // // copy over assets
-  // let destStylesPath = path.join(destPath, 'assets', 'stylesheets');
-  // fs.mkdirpSync(destStylesPath);
-  // ['article.css', 'reveal.css', 'slideshow.css', 'theme.css', 'code.css', 'grid.css'].forEach(af => {
-  //   fs.copySync(path.join(srcStylesPath, af), path.join(destStylesPath, af))
-  // });
-  //
-  // // copy reveal JS
-  // let destJSPath = path.join(destPath, 'assets', 'javascript');
-  // fs.mkdirpSync(destJSPath);
-  // ['reveal.js', 'reveal-initialize.js', 'plugins'].forEach(af => {
-  //   fs.copySync(path.join(srcJSPath, af), path.join(destJSPath, af))
-  // });
 }

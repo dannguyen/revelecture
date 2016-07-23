@@ -6,10 +6,17 @@ description: |
 
 
 paths:
-  slidesDir: slides
+  slides: slides/
+
+  assets:
+    javascript: javascript/
+    stylesheets: stylesheets/
+    images: images/
+
   templates:
     article: templates/article.html
     slideshow: templates/slideshow.html
+
   output:
     article: article.html
     slideshow: slideshow.html
